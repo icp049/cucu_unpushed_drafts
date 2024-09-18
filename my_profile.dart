@@ -270,31 +270,34 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ViewPhotoPage(
-                                photoUrl: post['imageUrl'],
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.primaries[index % Colors.primaries.length],
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: post['imageUrl'] != null
-                                ? Image.network(
-                                    post['imageUrl'],
-                                    fit: BoxFit.cover,
-                                  )
-                                : Container(),
-                          ),
-                        ),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ViewPhotoPage(
+          photoUrl: post['imageUrl'],
+          postText: post['postText'] ?? 'No text available',
+          postedBy: post['postedBy'] ?? 'Unknown',
+          createdAt: post['createdAt'].toDate(), // Ensure this is a DateTime object
+        ),
+      ),
+    );
+  },
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.primaries[index % Colors.primaries.length],
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+    clipBehavior: Clip.hardEdge,
+    child: AspectRatio(
+      aspectRatio: 1,
+      child: post['imageUrl'] != null
+          ? Image.network(
+              post['imageUrl'],
+              fit: BoxFit.cover,
+            )
+          : Container(),
+    ),
+  ),
                       ),
                     );
                   },
